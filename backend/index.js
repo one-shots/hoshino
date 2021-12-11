@@ -1,9 +1,16 @@
+// Server entry point is here
 const { PORT } = require('./config')
 const express = require('express')
 const app = express()
-const port = 3000
+const knexFile = require('./knexfile')
 
-app.get('/products', (req, res) => {
+// Add database to request's context
+app.use(function(req, res, next) {
+  req.database = require('knex')(knexFile)
+  next()
+})
+
+app.get('/products', async (req, res) => {
   res.send('Hello World!')
 })
 
