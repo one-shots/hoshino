@@ -32,6 +32,18 @@ function showReviews(productId) {
   })
 }
 
+// Display correct number of gold stars
+function fillStars(rating) {
+  for (let j = 1; j <= 5; j++) {
+    $('#rate-' + j).removeClass('filled-star')
+    $('#rate-' + j).addClass('star')
+  }
+  for (let j = 1; j <= rating; j++) {
+    $('#rate-' + j).removeClass('star')
+    $('#rate-' + j).addClass('filled-star')
+  }
+}
+
 $(document).ready(function() {
   // Get and display the product
   let currentProductId = 0
@@ -49,5 +61,38 @@ $(document).ready(function() {
   // Adding a review
   $('#add-review').on('click', function() {
     myModal.toggle()
+  })
+
+  // Submitting a review
+  let currentRating = 1
+  fillStars(currentRating)
+  for (let i = 1; i <= 5; i++) {
+    $('#rate-' + i).on('click', function() {
+      fillStars(i)
+      currentRating = i
+    })
+  }
+  $('#submit-review').on('click', function() {
+    const comment = $('#comment-input').val()
+
+    const newReview = {
+      rating: currentRating,
+      productId: currentProductId,
+      comment,
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: API_URL + '/reviews',
+      contentType: 'application/json',
+      data: JSON.stringify(newReview),
+      success: function(data) {
+        // Close the modal
+        myModal.hide()
+
+        // Add newest review
+
+      },
+    })
   })
 })
