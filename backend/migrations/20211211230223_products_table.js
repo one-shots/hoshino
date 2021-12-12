@@ -12,13 +12,13 @@ exports.up = function(knex) {
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
         .notNullable()
-      table.string('rating').notNullable()
-      table.string('comment')
+      table.integer('rating').notNullable()
+      table.text('comment')
     })
 }
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTable('products')
     .dropTable('reviews')
+    .dropTable('products')
 }
