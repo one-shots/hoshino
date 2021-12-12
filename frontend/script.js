@@ -18,7 +18,7 @@ function prependReview(review) {
   // Show an existing review
   $('#existing-reviews').prepend(
     $('<div/>')
-      .addClass('d-flex justify-content-start align-content-center existing-review')
+      .addClass('d-flex justify-content-start align-content-center')
       .append(starElements)
       .addClass('stars')
       .append(`<p class="existing-review__paragraph">${review.rating}<span class="existing-review__text">${commentShown}</span></p>`),
@@ -35,7 +35,16 @@ function updateAverageRating() {
     }, 0)
     const averageRating = sum / reviews.length
 
-    $('.average-rating .rating-number').text(averageRating.toFixed(1))
+    // Update average rating number
+    $('#average-rating .rating-number').text(averageRating.toFixed(1))
+
+
+    // Update average rating stars
+    $('#average-stars').empty()
+
+    for (let j = 1; j <= 5; j++) {
+      $('#average-stars').append(`<div class="${j <= averageRating + 0.5 ? 'filled-' : ''}star"></div>`)
+    }
   }
 
 }
