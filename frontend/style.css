@@ -74,6 +74,10 @@
   margin: 1.5rem 0;
 }
 
+.review-button {
+  padding: 0.5rem 2rem;
+}
+
 .no-border {
   border: none;
 }
