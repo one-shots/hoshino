@@ -32,7 +32,7 @@ app.get('/products', async (req, res) => {
 })
 
 app.get('/reviews', async (req, res) => {
-  const { productId } = req.params
+  const { productId } = req.query
   if (!productId) {
     return res.status(400).send({
       message: 'Invalid product ID',
@@ -40,7 +40,7 @@ app.get('/reviews', async (req, res) => {
   }
 
   try {
-    const results = await req.database('reviews').where({ productId })
+    const results = await req.database('reviews').where({ product_id: productId })
     return res.send(results)
   } catch (err) {
     return res.status(500).send({
