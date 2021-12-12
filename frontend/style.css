@@ -61,3 +61,19 @@
   height: 1.5rem;
   margin: .1rem;
 }
+
+.review-title {
+  margin: 0.5rem 0 1.5rem;
+}
+
+.review-header {
+  font-weight: normal;
+}
+
+.review-section {
+  margin: 1.5rem 0;
+}
+
+.no-border {
+  border: none;
+}
