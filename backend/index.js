@@ -1,8 +1,12 @@
 // Server entry point is here
 const { PORT } = require('./config')
+const knexFile = require('./knexfile')
+const cors = require('cors')
 const express = require('express')
 const app = express()
-const knexFile = require('./knexfile')
+
+// For simplicity, allow all origins
+app.use(cors())
 
 // Parse JSON
 app.use(express.json())
