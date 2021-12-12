@@ -30,6 +30,9 @@
 
 .stars {
   align-self: center;
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
   min-width: 10rem;
   font-size: 1.5rem;
 }
@@ -37,7 +40,7 @@
 .existing-reviews {
   border-top: #e1dfe0 0.1rem solid;
   margin-top: 2rem;
-  padding-top: 1.5rem;
+  padding-top: 1.5rem;,
 }
 
 .existing-review__paragraph {
@@ -50,3 +53,11 @@
   color: #797874;
 }
 
+.star {
+  background-image: url(blank-star.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: .1rem;
+}
