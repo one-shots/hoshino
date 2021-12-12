@@ -1,7 +1,52 @@
-.color-gold {
+.main-box {
+  margin: 2rem 0;
+}
+
+.main-card {
+  min-width: 600px;
+}
+
+.rating-box {
+  margin: 2rem 0;
+}
+
+.average-rating {
+  height: 3rem;
+}
+
+.gold-star {
   color: #fece6d;
 }
 
-.color-grey {
+.grey-star {
   color: #e1dfe0;
 }
+
+.rating-number {
+  font-size: 1.5rem;
+  vertical-align: center;
+  margin: auto 1rem auto 0;
+}
+
+.stars {
+  align-self: center;
+  min-width: 10rem;
+  font-size: 1.5rem;
+}
+
+.existing-reviews {
+  border-top: #e1dfe0 0.1rem solid;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.existing-review__paragraph {
+  margin: auto 0;
+  font-weight: bold;
+}
+
+.existing-review__text {
+  font-weight: normal;
+  color: #797874;
+}
+
