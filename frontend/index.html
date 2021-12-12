@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Review Products</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="d-flex justify-content-center flex-wrap main-box">
+      <div class="card main-card" style="width: 18rem;">
+        <div class="card-body">
+          <h1>Loading ...</h1>
+          <div class="d-flex justify-content-between align-content-center rating-box">
+            <div class="d-flex align-content-start average-rating">
+              <div class="rating-number">
+                1.0
+              </div>
+              <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+              </div>
+            </div>
+            <div class="d-flex align-content-center">
+              <button
+                id="add-review"
+                type="button"
+                class="btn btn-outline-secondary review-button"
+                data-bs-toggle="modal"
+                data-bs-target="#review-modal"
+              >
+                Add review
+              </button>
+            </div>
+          </div>
+
+          <div class="existing-reviews">
+            <h4>Reviews</h4>
+            <div class="d-flex justify-content-start align-content-center existing-review">
+              <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+              </div>
+              <p class="existing-review__paragraph">1<span class="existing-review__text">, the product was vaporware</span></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Review Modal -->
+    <div class="modal fade" id="review-modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2 class="review-title">What's your rating?</h2>
+            <h4 class="review-header">Rating</h4>
+            <div class="review-section">
+              <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+              </div>
+            </div>
+            <h4 class="review-header">Review</h4>
+            <div class="review-section">
+                <input type="email" class="form-control no-border" id="reviewCommentInput" placeholder="Start typing ...">
+            </div>
+            <div class="review-section">
+              <button
+                id="submit-review"
+                type="button"
+                class="btn btn-outline-secondary review-button"
+              >
+                Submit review
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+
+    <!-- importing app scripts (load order is important) -->
+    <script type="text/javascript" src="./script.js"></script>
+  </body>
+</html>
+
+
