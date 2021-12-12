@@ -1,5 +1,8 @@
 const API_URL = 'http://localhost:4001' // TODO set this as env var in a build tool
 
+let currentProduct = null
+let allReviews = []
+
 function prependReview(review) {
   // Only show comment if it it's not blank
   let commentShown = ''
@@ -22,8 +25,27 @@ function prependReview(review) {
   )
 }
 
-function showReviews(productId) {
+function updateAverageRating() {
+  const reviews = allReviews
+
+  if (reviews.length) {
+    const sum = reviews.reduce(function(acc, curr) {
+      console.log(curr.rating, acc)
+      return curr.rating + acc
+    }, 0)
+    const averageRating = sum / reviews.length
+
+    $('.average-rating .rating-number').text(averageRating.toFixed(1))
+  }
+
+}
+
+function refreshReviews(productId) {
   $.get(API_URL + '/reviews?productId=' + productId, function(reviews) {
+
+    allReviews = reviews
+
+    updateAverageRating()
 
     // Remove placeholders
     $('#existing-reviews').empty()
@@ -48,13 +70,12 @@ function fillStars(rating) {
 }
 
 $(document).ready(function() {
+
   // Get and display the product
-  let currentProductId = 0
   $.get(API_URL + '/products', function(data) {
-    const product = data[0]
-    currentProductId = product.id
-    $('#product-name').text(product.name)
-    showReviews(currentProductId)
+    currentProduct=data[0]
+    $('#product-name').text(currentProduct.name)
+    refreshReviews(currentProduct.id)
   })
 
   const reviewModal = new bootstrap.Modal(document.getElementById('review-modal'), {
@@ -80,7 +101,7 @@ $(document).ready(function() {
 
     const newReview = {
       rating: currentRating,
-      productId: currentProductId,
+      productId: currentProduct.id,
       comment,
     }
 
@@ -93,8 +114,12 @@ $(document).ready(function() {
         // Close the modal
         reviewModal.hide()
 
-        // Add newest review
+        // Show newest review
         prependReview(newReview)
+        allReviews.push(newReview)
+
+        // Update average rating
+        updateAverageRating()
       },
     })
   })

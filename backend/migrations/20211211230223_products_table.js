@@ -12,7 +12,7 @@ exports.up = function(knex) {
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
         .notNullable()
-      table.string('rating').notNullable()
+      table.integer('rating').notNullable()
       table.text('comment')
     })
 }
