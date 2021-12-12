@@ -45,6 +45,7 @@ app.get('/reviews', async (req, res) => {
   } catch (err) {
     return res.status(500).send({
       message: 'Failed to get reviews',
+      error: err,
     })
   }
 })
@@ -83,6 +84,7 @@ app.post('/reviews', async function(req, res) {
   } catch (err) {
     return res.status(500).send({
       message: 'Failed to create review',
+      error: err,
     })
   }
 })

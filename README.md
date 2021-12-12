@@ -8,7 +8,7 @@ Project architecture:
 - For UI components, I just used Bootstrap
 
 If this were a real project that grows, future improvements may include:
-- Adopt conventions for names, semantics, error handling, unit tests, etc
+- Adopt conventions for names, semantics, error handling, input validation, unit tests, etc.
 - Improve security, add users and auth
 - Improve UI: pagination, CRUD components for reviews and products
 - Improve vanilla/jquery frontend:
