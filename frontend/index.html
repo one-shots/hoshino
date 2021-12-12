@@ -13,9 +13,9 @@
   </head>
   <body>
     <div class="d-flex justify-content-center flex-wrap main-box">
-      <div class="card main-card" style="width: 18rem;">
+      <div id="current-product" class="card main-card" style="width: 18rem;">
         <div class="card-body">
-          <h1>Loading ...</h1>
+          <h1 id="product-name">Loading ...</h1>
           <div class="d-flex justify-content-between align-content-center rating-box">
             <div class="d-flex align-content-start average-rating">
               <div class="rating-number">
@@ -42,19 +42,8 @@
             </div>
           </div>
 
-          <div class="existing-reviews">
-            <h4>Reviews</h4>
-            <div class="d-flex justify-content-start align-content-center existing-review">
-              <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-              </div>
-              <p class="existing-review__paragraph">1<span class="existing-review__text">, the product was vaporware</span></p>
-            </div>
-          </div>
+          <h4 class="existing-reviews__header">Reviews</h4>
+          <div id="existing-reviews"></div>
 
         </div>
       </div>
@@ -69,16 +58,16 @@
             <h4 class="review-header">Rating</h4>
             <div class="review-section">
               <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
+                <div id="rate-1" class="star"></div>
+                <div id="rate-2" class="star"></div>
+                <div id="rate-3" class="star"></div>
+                <div id="rate-4" class="star"></div>
+                <div id="rate-5" class="star"></div>
               </div>
             </div>
             <h4 class="review-header">Review</h4>
             <div class="review-section">
-                <input type="email" class="form-control no-border" id="reviewCommentInput" placeholder="Start typing ...">
+              <input id="comment-input" type="email" class="form-control no-border" id="reviewCommentInput" placeholder="Start typing ...">
             </div>
             <div class="review-section">
               <button
