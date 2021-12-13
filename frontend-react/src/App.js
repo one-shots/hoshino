@@ -40,13 +40,56 @@ const ReviewModal = () => {
   )
 }
 
+const useProducts = (videogameSlug) => {
+  const [products, setProducts] = React.useState([])
+  const [error, setError] = React.useState()
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+
+    setLoading(true)
+
+    fetch(`${API_URL}/products`)
+      .then(response => response.json())
+      .then((data) => {
+        setProducts(data)
+      })
+      .catch(err => {
+        setError(err)
+      })
+      .then(() => {
+        setLoading(false)
+      })
+
+    return () => {
+      setProducts([])
+      setError(undefined)
+      setLoading(false)
+    }
+  }, [])
+
+  return {
+    error,
+    loading,
+    products,
+  }
+}
 
 const App = () => {
+  const {
+    error,
+    loading,
+    products,
+  } = useProducts()
+
+  console.log(error)
+  console.log(products)
 
   return (
     <div className="d-flex justify-content-center flex-wrap main-box">
       <div id="current-product" className="card main-card">
         <div className="card-body">
+          {error && <h4 className="error-message">{`${error}`}</h4>}
 
           <h1 id="product-name">Loading ...</h1>
           <div className="d-flex justify-content-between align-content-center rating-box">

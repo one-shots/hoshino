@@ -93,3 +93,7 @@
 .no-border {
   border: none;
 }
+
+.error-message {
+  color: red;
+}
