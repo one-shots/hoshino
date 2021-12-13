@@ -148,13 +148,13 @@ const Product = ({ product }) => {
       body: JSON.stringify(newReview),
     })
       .then(res => {
-      const json = res.json()
-      setReviews([
-        ...reviews,
-        json,
-      ])
-      setShowModal(false)
-    })
+        // TODO should get new review from server, instead of adding this one with no review.id:
+        setReviews([
+          ...reviews,
+          newReview,
+        ])
+        setShowModal(false)
+      })
   }
 
   if (!product || !product.id) {
