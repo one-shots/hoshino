@@ -1,44 +1,10 @@
 import * as React from 'react'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import Modal from 'react-bootstrap/Modal'
 import './App.css'
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
-
-const ReviewModal = () => {
-  return (
-    <div className="modal fade" id="review-modal" tabIndex="-1" aria-hidden="true">
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-body">
-            <h2 className="review-title">What's your rating?</h2>
-            <h4 className="review-header">Rating</h4>
-            <div className="review-section">
-              <div className="stars">
-                <div id="rate-1" className="star"></div>
-                <div id="rate-2" className="star"></div>
-                <div id="rate-3" className="star"></div>
-                <div id="rate-4" className="star"></div>
-                <div id="rate-5" className="star"></div>
-              </div>
-            </div>
-            <h4 className="review-header">Review</h4>
-            <div className="review-section">
-              <input id="comment-input" type="email" className="form-control no-border" id="reviewCommentInput" placeholder="Start typing ..." />
-            </div>
-            <div className="review-section">
-              <button
-                id="submit-review"
-                type="button"
-                className="btn btn-outline-secondary review-button"
-              >
-                Submit review
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 const useProducts = () => {
   const [products, setProducts] = React.useState([])
@@ -149,11 +115,16 @@ const ExistingReview = ({ review }) => {
 }
 
 const Product = ({ product }) => {
+  const [showModal, setShowModal] = React.useState(false)
+
   const {
     error,
-    loading,
     reviews,
-  } = useReviews(product.id)
+  } = useReviews(product && product.id)
+
+  const submit = () => {
+    // TODO
+  }
 
   if (!product || !product.id) {
     return (
@@ -184,15 +155,14 @@ const Product = ({ product }) => {
           <Stars count={averageRating} />
         </div>
         <div className="d-flex align-content-center">
-          <button
+          <Button
             id="add-review"
-            type="button"
-            className="btn btn-outline-secondary review-button"
-            data-bs-toggle="modal"
-            data-bs-target="#review-modal"
+            variant="outline-secondary"
+            className="review-button"
+            onClick={() => setShowModal(true)}
           >
             Add review
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -202,6 +172,42 @@ const Product = ({ product }) => {
           <ExistingReview review={review} key={`review-${i}`} />
         ))}
       </div>
+
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        keyboard
+      >
+        <Modal.Body>
+          <div className="modal-body">
+            <h2 className="review-title">What's your rating?</h2>
+            <h4 className="review-header">Rating</h4>
+            <div className="review-section">
+              <div className="stars">
+                <div id="rate-1" className="star"></div>
+                <div id="rate-2" className="star"></div>
+                <div id="rate-3" className="star"></div>
+                <div id="rate-4" className="star"></div>
+                <div id="rate-5" className="star"></div>
+              </div>
+            </div>
+            <h4 className="review-header">Review</h4>
+            <div className="review-section">
+              <input id="comment-input" type="email" className="form-control no-border" id="reviewCommentInput" placeholder="Start typing ..." />
+            </div>
+            <div className="review-section">
+              <Button
+                id="submit-review"
+                variant="outline-secondary"
+                className="review-button"
+                onClick={submit}
+              >
+                Submit review
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   )
 }
@@ -217,16 +223,16 @@ const App = () => {
 
   return (
     <div className="d-flex justify-content-center flex-wrap main-box">
-      <div id="current-product" className="card main-card">
-        <div className="card-body">
+      <Card id="current-product" className="card main-card">
+        <Card.Body>
           {error && <h4 className="error-message">{`${error}`}</h4>}
           {loading ? (
             <h1 id="product-name">Loading ...</h1>
           ) : (
             <Product product={product} />
           )}
-        </div>
-      </div>
+        </Card.Body>
+      </Card>
     </div>
   )
 }

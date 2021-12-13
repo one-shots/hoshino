@@ -22,6 +22,7 @@ If this were a real project that grows, future improvements may include:
 
 ## Local Development
 
+### Setup locally
 Install Postgres locally and create db:
 
 ```shell script
@@ -44,16 +45,29 @@ npm run migrate
 npm run seed
 ```
 
+### Run locally
+
 Run server:
 
 ```shell script
 npm start
 ```
 
-Server vanilla/jQuery frontend:
+Run vanilla/jQuery frontend:
 - Use a local file server like Python's SimpleHTTPServer or [serve](https://www.npmjs.com/package/serve) 
 - Have your IDE serve the files in _frontend/*_
 
+
+Run React 
+
+```shell script
+cd frontend-react/
+yarn start
+``` 
+
 ## Deploy
 
-TODO
+```shell script
+cd frontend-react/
+yarn build
+```
