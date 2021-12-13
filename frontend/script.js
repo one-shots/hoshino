@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4001' // TODO set this as env var in a build tool
+const API_URL = 'http://localhost:3001' // TODO set this as env var in a build tool, or serve it statically from server
 
 let currentProduct = null
 let allReviews = []
