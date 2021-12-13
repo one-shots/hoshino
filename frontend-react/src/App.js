@@ -41,14 +41,19 @@ const useProducts = () => {
   }
 }
 
-const Star = ({ filled }) => {
+const Star = ({ filled, onClick }) => {
   return (
-    <div className={`${filled ? 'filled-' : ''}star`}>
-    </div>
+    <div
+      className={`${filled ? 'filled-' : ''}star`}
+      onClick={onClick}
+    />
   )
 }
 
-const Stars = ({ count }) => {
+const Stars = ({
+  count, onClick = () => {
+  },
+}) => {
   return (
     <div id="average-stars" className="stars d-flex justify-content-start align-content-center">
       {[1, 2, 3, 4, 5].map((num) => {
@@ -56,6 +61,7 @@ const Stars = ({ count }) => {
           <Star
             key={`star-${num}`}
             filled={num <= count + 0.5}
+            onClick={() => onClick(num)}
           />
         )
       })}
@@ -122,7 +128,15 @@ const Product = ({ product }) => {
     reviews,
   } = useReviews(product && product.id)
 
+  const [comment, setComment] = React.useState('')
+  const [rating, setRating] = React.useState(1)
   const submit = () => {
+    const newReview = {
+      productId: product.id,
+      rating,
+      comment,
+    }
+    console.log(newReview)
     // TODO
   }
 
@@ -137,7 +151,6 @@ const Product = ({ product }) => {
   let averageRating = 0.0
   if (reviews.length) {
     const sum = reviews.reduce(function(acc, curr) {
-      console.log(curr.rating, acc)
       return curr.rating + acc
     }, 0)
     averageRating = sum / reviews.length
@@ -183,17 +196,18 @@ const Product = ({ product }) => {
             <h2 className="review-title">What's your rating?</h2>
             <h4 className="review-header">Rating</h4>
             <div className="review-section">
-              <div className="stars">
-                <div id="rate-1" className="star"></div>
-                <div id="rate-2" className="star"></div>
-                <div id="rate-3" className="star"></div>
-                <div id="rate-4" className="star"></div>
-                <div id="rate-5" className="star"></div>
-              </div>
+              <Stars count={rating} onClick={rating => setRating(rating)} />
             </div>
             <h4 className="review-header">Review</h4>
             <div className="review-section">
-              <input id="comment-input" type="email" className="form-control no-border" id="reviewCommentInput" placeholder="Start typing ..." />
+              <input
+                id="comment-input"
+                type="text"
+                className="form-control no-border"
+                placeholder="Start typing ..."
+                value={comment}
+                onChange={e => setComment(e.target.value)}
+              />
             </div>
             <div className="review-section">
               <Button

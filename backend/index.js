@@ -27,6 +27,7 @@ app.get('/products', async (req, res) => {
   } catch (err) {
     return res.status(500).send({
       message: 'Failed to get products',
+      error: err,
     })
   }
 })
