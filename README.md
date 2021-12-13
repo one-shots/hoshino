@@ -8,14 +8,15 @@ Project architecture:
 - For UI components, I just used Bootstrap
 
 If this were a real project that grows, future improvements may include:
-- Adopt conventions for names, semantics, error handling, input validation, unit tests, etc.
+- Adopt conventions for names, semantics, folder structure, error handling, input validation, unit tests, etc.
 - Improve security, add users and auth
-- Improve UI: pagination, CRUD components for reviews and products
+- Improve UI: pagination, more CRUD components, responsive layout
 - Improve vanilla/jquery frontend:
-    - Use SASS/SCSS where possible
+    - Use SASS/SCSS
     - Use a tool like Grunt/Gulp/etc to build the static files, better browser compatibility
 - Improve React frontend:
     - Explore state management e.g. Redux, MobX, ..
+    - Explore nested styling in each component, e.g. `styled-components`
 - Use TypeScript, which I find reduces bugs and encourages better conventions
 - The API is currently RESTful, but GraphQL can be helpful especially for reducing client requests and to make the frontend development experience more intuitive
 

@@ -1,25 +1,86 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react'
+import './App.css'
 
-function App() {
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
+
+const ReviewModal = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="modal fade" id="review-modal" tabIndex="-1" aria-hidden="true">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-body">
+            <h2 className="review-title">What's your rating?</h2>
+            <h4 className="review-header">Rating</h4>
+            <div className="review-section">
+              <div className="stars">
+                <div id="rate-1" className="star"></div>
+                <div id="rate-2" className="star"></div>
+                <div id="rate-3" className="star"></div>
+                <div id="rate-4" className="star"></div>
+                <div id="rate-5" className="star"></div>
+              </div>
+            </div>
+            <h4 className="review-header">Review</h4>
+            <div className="review-section">
+              <input id="comment-input" type="email" className="form-control no-border" id="reviewCommentInput" placeholder="Start typing ..." />
+            </div>
+            <div className="review-section">
+              <button
+                id="submit-review"
+                type="button"
+                className="btn btn-outline-secondary review-button"
+              >
+                Submit review
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+
+const App = () => {
+
+  return (
+    <div className="d-flex justify-content-center flex-wrap main-box">
+      <div id="current-product" className="card main-card">
+        <div className="card-body">
+
+          <h1 id="product-name">Loading ...</h1>
+          <div className="d-flex justify-content-between align-content-center rating-box">
+            <div id="average-rating" className="d-flex align-content-start">
+              <div className="rating-number">
+                1.0
+              </div>
+              <div id="average-stars" className="stars d-flex justify-content-start align-content-center">
+                <div className="star"></div>
+                <div className="star"></div>
+                <div className="star"></div>
+                <div className="star"></div>
+                <div className="star"></div>
+              </div>
+            </div>
+            <div className="d-flex align-content-center">
+              <button
+                id="add-review"
+                type="button"
+                className="btn btn-outline-secondary review-button"
+                data-bs-toggle="modal"
+                data-bs-target="#review-modal"
+              >
+                Add review
+              </button>
+            </div>
+          </div>
+
+          <h4 className="existing-reviews__header">Reviews</h4>
+          <div id="existing-reviews"></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App
