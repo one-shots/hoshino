@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
 import './App.css'
+import { useInterval } from './hooks'
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
 
@@ -74,7 +75,10 @@ const useReviews = (productId) => {
   const [error, setError] = React.useState()
   const [loading, setLoading] = React.useState(true)
 
-  React.useEffect(() => {
+  // A naive way to implement real time: by polling the endpoint.
+  // Good enough for a (dare I say) "minimalist" implementation,
+  // but, in a real project, it's better to use WebSocket
+  useInterval(() => {
     if (productId) {
       setLoading(true)
       fetch(`${API_URL}/reviews?productId=${productId}`)
@@ -97,13 +101,12 @@ const useReviews = (productId) => {
       setError(undefined)
       setLoading(false)
     }
-  }, [productId])
+  }, 1000)
 
   return {
     error,
     loading,
     reviews,
-    setReviews,
   }
 }
 
@@ -127,7 +130,6 @@ const Product = ({ product }) => {
   const {
     error,
     reviews,
-    setReviews,
   } = useReviews(product && product.id)
 
   const [comment, setComment] = React.useState('')
@@ -148,11 +150,6 @@ const Product = ({ product }) => {
       body: JSON.stringify(newReview),
     })
       .then(res => {
-        // TODO should get new review from server, instead of adding this one with no review.id:
-        setReviews([
-          ...reviews,
-          newReview,
-        ])
         setShowModal(false)
       })
   }
@@ -198,9 +195,11 @@ const Product = ({ product }) => {
 
       <h4 className="existing-reviews__header">Reviews</h4>
       <div id="existing-reviews">
-        {reviews.slice().reverse().map((review, i) => (
-          <ExistingReview review={review} key={`review-${i}`} />
-        ))}
+        {(reviews || []).slice().reverse().map((review, i) => {
+          return(
+            <ExistingReview review={review} key={`review-${i}`} />
+          )
+        })}
       </div>
 
       <Modal
