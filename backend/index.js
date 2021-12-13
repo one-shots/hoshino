@@ -13,8 +13,9 @@ app.use(express.json())
 
 
 // Add database to request's context
+const knexDb = require('knex')(knexFile)
 app.use(function(req, res, next) {
-  req.database = require('knex')(knexFile)
+  req.database = knexDb
   next()
 })
 
@@ -25,6 +26,7 @@ app.get('/products', async (req, res) => {
     const rows = await req.database('products').select('*')
     return res.send(rows)
   } catch (err) {
+    console.error(err)
     return res.status(500).send({
       message: 'Failed to get products',
       error: err,
@@ -44,6 +46,7 @@ app.get('/reviews', async (req, res) => {
     const results = await req.database('reviews').where({ product_id: productId })
     return res.send(results)
   } catch (err) {
+    console.error(err)
     return res.status(500).send({
       message: 'Failed to get reviews',
       error: err,
@@ -83,6 +86,7 @@ app.post('/reviews', async function(req, res) {
       inserted: result.rowCount,
     })
   } catch (err) {
+    console.error(err)
     return res.status(500).send({
       message: 'Failed to create review',
       error: err,
