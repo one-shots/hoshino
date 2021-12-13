@@ -44,7 +44,12 @@ app.get('/reviews', async (req, res) => {
 
   try {
     const results = await req.database('reviews').where({ product_id: productId })
-    return res.send(results)
+    return res.send(results.map(row => {
+      return {
+        ...row,
+        rating: parseFloat(row.rating),
+      }
+    }))
   } catch (err) {
     console.error(err)
     return res.status(500).send({
