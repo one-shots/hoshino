@@ -4,6 +4,7 @@
   "description": "Backend server in NodeJS",
   "main": "index.js",
   "scripts": {
+    "docker:build": "docker build . -t hoshino/api -f Dockerfile",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
     "start": "node index.js",

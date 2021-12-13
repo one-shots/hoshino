@@ -68,6 +68,15 @@ yarn start
 
 ## Deploy
 
+Build backend in Docker and deploy into AWS/etc.:
+
+```shell script
+cd backend/
+npm run docker:build
+```
+
+Build frontend files, which can be served on Netlify/etc.: 
+
 ```shell script
 cd frontend-react/
 yarn build
