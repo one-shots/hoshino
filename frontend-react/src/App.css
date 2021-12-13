@@ -1,38 +1,95 @@
-.App {
-  text-align: center;
+.main-box {
+  margin: 2rem 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main-card {
+  min-width: 600px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.rating-box {
+  margin: 2rem 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#average-rating {
+  height: 3rem;
 }
 
-.App-link {
-  color: #61dafb;
+.gold-star {
+  color: #fece6d;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grey-star {
+  color: #e1dfe0;
+}
+
+.rating-number {
+  font-size: 1.5rem;
+  vertical-align: center;
+  margin: auto 1rem auto 0;
+}
+
+.stars {
+  align-self: center;
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  min-width: 10rem;
+  font-size: 1.5rem;
+  margin: 0.2rem 0;
+}
+
+.existing-reviews__header {
+  border-top: #e1dfe0 0.1rem solid;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-top: 1.5rem;
+}
+
+.existing-review__paragraph {
+  margin: auto 0;
+  font-weight: bold;
+  font-size: smaller;
+}
+
+.existing-review__text {
+  font-weight: normal;
+  color: #797874;
+}
+
+.star {
+  background-image: url(./blank-star.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: .1rem;
+}
+
+.filled-star {
+  background-image: url(./filled-star.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: .1rem;
+}
+
+.review-title {
+  margin: 0.5rem 0 1.5rem;
+}
+
+.review-header {
+  font-weight: normal;
+}
+
+.review-section {
+  margin: 1.5rem 0;
+}
+
+.review-button {
+  padding: 0.5rem 2rem;
+}
+
+.no-border {
+  border: none;
 }
