@@ -75,6 +75,28 @@ const useProducts = () => {
   }
 }
 
+const Star = ({ filled }) => {
+  return (
+    <div className={`${filled ? 'filled-' : ''}star`}>
+    </div>
+  )
+}
+
+const Stars = ({ count }) => {
+  return (
+    <div id="average-stars" className="stars d-flex justify-content-start align-content-center">
+      {[1, 2, 3, 4, 5].map((num) => {
+        return (
+          <Star
+            key={`star-${num}`}
+            filled={num <= count + 0.5}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
 const useReviews = (productId) => {
   const [reviews, setReviews] = React.useState([])
   const [error, setError] = React.useState()
@@ -113,11 +135,15 @@ const useReviews = (productId) => {
 }
 
 const ExistingReview = ({ review }) => {
-  // TODO
+  let commentShown = ''
+  if (review.comment) {
+    commentShown = ', ' + review.comment.slice(0, 1).toLowerCase() + review.comment.slice(1)
+  }
 
   return (
     <div className="d-flex justify-content-start align-content-center">
-
+      <Stars count={review.rating} />
+      <p className="existing-review__paragraph">{review.rating}<span className="existing-review__text">{commentShown}</span></p>
     </div>
   )
 }
@@ -137,21 +163,25 @@ const Product = ({ product }) => {
     )
   }
 
+  let averageRating = 0.0
+  if (reviews.length) {
+    const sum = reviews.reduce(function(acc, curr) {
+      console.log(curr.rating, acc)
+      return curr.rating + acc
+    }, 0)
+    averageRating = sum / reviews.length
+  }
+
   return (
     <>
+      {error && <h4 className="error-message">{`${error}`}</h4>}
       <h1 id="product-name">{product.name || '???'}</h1>
       <div className="d-flex justify-content-between align-content-center rating-box">
         <div id="average-rating" className="d-flex align-content-start">
           <div className="rating-number">
-            1.0
+            {averageRating.toFixed(1)}
           </div>
-          <div id="average-stars" className="stars d-flex justify-content-start align-content-center">
-            <div className="star"></div>
-            <div className="star"></div>
-            <div className="star"></div>
-            <div className="star"></div>
-            <div className="star"></div>
-          </div>
+          <Stars count={averageRating} />
         </div>
         <div className="d-flex align-content-center">
           <button
@@ -168,8 +198,8 @@ const Product = ({ product }) => {
 
       <h4 className="existing-reviews__header">Reviews</h4>
       <div id="existing-reviews">
-        {reviews.map(review => (
-          <ExistingReview review={review} />
+        {reviews.map((review, i) => (
+          <ExistingReview review={review} key={`review-${i}`} />
         ))}
       </div>
     </>
