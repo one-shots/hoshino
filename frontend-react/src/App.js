@@ -103,6 +103,7 @@ const useReviews = (productId) => {
     error,
     loading,
     reviews,
+    setReviews,
   }
 }
 
@@ -126,6 +127,7 @@ const Product = ({ product }) => {
   const {
     error,
     reviews,
+    setReviews,
   } = useReviews(product && product.id)
 
   const [comment, setComment] = React.useState('')
@@ -136,8 +138,23 @@ const Product = ({ product }) => {
       rating,
       comment,
     }
-    console.log(newReview)
-    // TODO
+
+    fetch(`${API_URL}/reviews`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newReview),
+    })
+      .then(res => {
+      const json = res.json()
+      setReviews([
+        ...reviews,
+        json,
+      ])
+      setShowModal(false)
+    })
   }
 
   if (!product || !product.id) {
@@ -181,7 +198,7 @@ const Product = ({ product }) => {
 
       <h4 className="existing-reviews__header">Reviews</h4>
       <div id="existing-reviews">
-        {reviews.map((review, i) => (
+        {reviews.slice().reverse().map((review, i) => (
           <ExistingReview review={review} key={`review-${i}`} />
         ))}
       </div>
