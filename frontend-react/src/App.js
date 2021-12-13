@@ -76,7 +76,7 @@ const useReviews = (productId) => {
   const [loading, setLoading] = React.useState(true)
 
   // A naive way to implement real time: by polling the endpoint.
-  // Good enough for a (dare I say) "minimalist" implementation,
+  // Good enough for a (shall we say) "minimalist" implementation,
   // but, in a real project, it's better to use WebSocket
   useInterval(() => {
     if (productId) {

@@ -6,6 +6,7 @@ Project architecture:
 - The backend is in NodeJS. It is not as feature-rich as the Rails ecosystem, but it's a good option for a (dare I say) _minimalist_ implementation
 - Each commit is squash merged from [Pull Requests](https://github.com/one-shots/hoshino/pulls), please see each PR for unsquashed changes.
 - For UI components, I just used Bootstrap
+- For "real time", I just used HTTP polling as a basic solution, but I don't know if you were specifically looking for WebSocket (if so, I'm happy to do that)
 
 If this were a real project that grows, future improvements may include:
 - Adopt conventions for names, semantics, folder structure, error handling, input validation, unit tests, etc.
