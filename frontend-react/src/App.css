@@ -30,7 +30,7 @@
 
 .stars {
   align-self: center;
-  display:flex;
+  display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   min-width: 10rem;
@@ -55,22 +55,42 @@
   color: #797874;
 }
 
-.star {
+.star-left {
   background-image: url(./blank-star.svg);
   background-repeat: no-repeat;
-  background-size: 100%;
-  width: 1.5rem;
+  background-size: 1.5rem 1.5rem;
+  width: .75rem;
   height: 1.5rem;
-  margin: .1rem;
+  margin: .1rem 0 .1rem .1rem;
 }
 
-.filled-star {
+.star-right {
+  background-image: url(./blank-star.svg);
+  background-repeat: no-repeat;
+  background-size: 1.5rem 1.5rem;
+  width: .75rem;
+  height: 1.5rem;
+  margin: .1rem .1rem .1rem 0;
+  background-position: -0.75rem;
+}
+
+.filled-star-left {
   background-image: url(./filled-star.svg);
   background-repeat: no-repeat;
-  background-size: 100%;
-  width: 1.5rem;
+  background-size: 1.5rem 1.5rem;
+  width: .75rem;
   height: 1.5rem;
-  margin: .1rem;
+  margin: .1rem 0 .1rem .1rem;
+}
+
+.filled-star-right {
+  background-image: url(./filled-star.svg);
+  background-repeat: no-repeat;
+  background-size: 1.5rem 1.5rem;
+  width: .75rem;
+  height: 1.5rem;
+  margin: .1rem .1rem .1rem 0;
+  background-position: -0.75rem;
 }
 
 .review-title {

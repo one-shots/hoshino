@@ -42,12 +42,23 @@ const useProducts = () => {
   }
 }
 
-const Star = ({ filled, onClick }) => {
+// I just broke the star 2 halves, by modifying the background-position of the star image.
+// There are probably other ways to do it with click positioning or CSS tricks, and in a real setting we would want to verify which one is the most browser compatible.
+const Star = ({ status = null, onClick }) => {
+  const leftHalf = status ? 'filled-' : ''
+  const rightHalf = status === 'full' ? 'filled-' : ''
+
   return (
-    <div
-      className={`${filled ? 'filled-' : ''}star`}
-      onClick={onClick}
-    />
+    <>
+      <div
+        className={`${leftHalf}star-left`}
+        onClick={onClick}
+      />
+      <div
+        className={`${rightHalf}star-right`}
+        onClick={onClick}
+      />
+    </>
   )
 }
 
@@ -61,7 +72,7 @@ const Stars = ({
         return (
           <Star
             key={`star-${num}`}
-            filled={num <= count + 0.5}
+            status={num <= count + 0.5}
             onClick={() => onClick(num)}
           />
         )
@@ -113,13 +124,13 @@ const useReviews = (productId) => {
 const ExistingReview = ({ review }) => {
   let commentShown = ''
   if (review.comment) {
-    commentShown = ', ' + review.comment.slice(0, 1).toLowerCase() + review.comment.slice(1)
+    commentShown = `, ${review.comment.slice(0, 1).toLowerCase()}${review.comment.slice(1)}`
   }
 
   return (
     <div className="d-flex justify-content-start align-content-center">
       <Stars count={review.rating} />
-      <p className="existing-review__paragraph">{review.rating}<span className="existing-review__text">{commentShown}</span></p>
+      <p className="existing-review__paragraph">{parseFloat(review.rating).toFixed(1)}<span className="existing-review__text">{commentShown}</span></p>
     </div>
   )
 }
@@ -196,7 +207,7 @@ const Product = ({ product }) => {
       <h4 className="existing-reviews__header">Reviews</h4>
       <div id="existing-reviews">
         {(reviews || []).slice().reverse().map((review, i) => {
-          return(
+          return (
             <ExistingReview review={review} key={`review-${i}`} />
           )
         })}
