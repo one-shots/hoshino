@@ -75,7 +75,7 @@ app.post('/reviews', async function(req, res) {
     })
   }
 
-  if (typeof body.rating !== 'number' || body.rating < 1 || body.rating > 5) {
+  if (typeof body.rating !== 'number' || body.rating <= 0 || body.rating > 5) {
     return res.status(400).send({
       message: 'Invalid rating',
     })

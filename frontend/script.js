@@ -30,7 +30,6 @@ function updateAverageRating() {
 
   if (reviews.length) {
     const sum = reviews.reduce(function(acc, curr) {
-      console.log(curr.rating, acc)
       return curr.rating + acc
     }, 0)
     const averageRating = sum / reviews.length
