@@ -109,6 +109,11 @@
   padding: 0.5rem 2rem;
 }
 
+.delete-reviews-button {
+  margin: 1rem 0;
+  padding: 0.5rem 2rem;
+}
+
 .no-border {
   border: none;
 }

@@ -2,11 +2,14 @@
 
 Hoshino means "stars" in Japanese.
 
+[Live demo](https://hoshino.dragonwatcher.com)
+
 Project architecture:
 - The backend is in NodeJS. It is not as feature-rich as the Rails ecosystem, but it's a good option for a (dare I say) _minimalist_ implementation
-- Each commit is squash merged from [Pull Requests](https://github.com/one-shots/hoshino/pulls), please see each PR for unsquashed changes.
-- For UI components, I just used Bootstrap
-- For "real time", I just used HTTP polling as a basic solution, but I don't know if you were specifically looking for WebSocket (if so, I'm happy to do that)
+- For a cleaner commit history, each big change is squash merged from a [Pull Request](https://github.com/one-shots/hoshino/pulls?q=)
+- For UI components, we're using good old Bootstrap
+- For convenience, a `delete reviews` button appears if there are many reviews
+- For the "real time" requirement, I used HTTP polling as a crude solution and don't know if you were specifically looking for WebSocket? If so, I'd be happy to do that
 
 If this were a real project that grows, future improvements may include:
 - Adopt conventions for names, semantics, folder structure, error handling, input validation, unit tests, etc.
@@ -18,8 +21,8 @@ If this were a real project that grows, future improvements may include:
 - Improve React frontend:
     - Explore state management e.g. Redux, MobX, ..
     - Explore nested styling in each component, e.g. `styled-components`
-- Use TypeScript, which I find reduces bugs and encourages better conventions
-- The API is currently RESTful, but GraphQL can be helpful especially for reducing client requests and to make the frontend development experience more intuitive
+- Use TypeScript, which should reduce bugs and encourage cleaner code as the project grows
+- The API is currently RESTful, but GraphQL can be helpful in some ways, such as reducing client requests and making the frontend dev experience more intuitive
 
 ## Local Development
 
@@ -51,24 +54,25 @@ npm run seed
 Run server:
 
 ```shell script
+cd backend
+npm i
 npm start
 ```
 
 Run vanilla/jQuery frontend:
-- Use a local file server like Python's SimpleHTTPServer or [serve](https://www.npmjs.com/package/serve) 
-- Have your IDE serve the files in _frontend/*_
+- Use local server like Python's SimpleHTTPServer
+- Or the [serve](https://www.npmjs.com/package/serve) package and run `serve -p 3000 frontend/`
 
-
-Run React 
-
+Run React frontend
 ```shell script
 cd frontend-react/
+yarn install
 yarn start
 ``` 
 
 ## Deploy
 
-Build backend in Docker and deploy into AWS/etc.:
+Deploy backend to Heroku/etc as Node app, or build it in Docker and deploy into AWS/etc.:
 
 ```shell script
 cd backend/

@@ -99,6 +99,21 @@ app.post('/reviews', async function(req, res) {
   }
 })
 
+app.post('/reviews/purge', async function(req, res) {
+  try {
+    const result = await req.database('reviews').delete()
+    return res.status(201).send({
+      result
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).send({
+      message: 'Failed to delete all reviews',
+      error: err,
+    })
+  }
+})
+
 
 // start Express app server
 app.listen(PORT, () => {

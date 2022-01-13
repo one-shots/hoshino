@@ -74,7 +74,7 @@ const Stars = ({
         let fillStatus = 'none'
         if (num - 0.25 <= count) {
           fillStatus = 'full'
-        }else if (num - 0.75 <= count) {
+        } else if (num - 0.75 <= count) {
           fillStatus = 'half'
         }
         return (
@@ -147,12 +147,13 @@ const Product = ({ product }) => {
   const [showModal, setShowModal] = React.useState(false)
 
   const {
-    error,
+    error: getReviewsError,
     reviews,
   } = useReviews(product && product.id)
 
   const [comment, setComment] = React.useState('')
   const [rating, setRating] = React.useState(1)
+  const [errorMessage, setErrorMessage] = React.useState('')
   const submit = () => {
     const newReview = {
       productId: product.id,
@@ -170,6 +171,7 @@ const Product = ({ product }) => {
     })
       .then(res => {
         setShowModal(false)
+        setComment('')
       })
   }
 
@@ -189,9 +191,37 @@ const Product = ({ product }) => {
     averageRating = sum / reviews.length
   }
 
+  // For convenience: button to delete all reviews when we add too many
+  const deleteReviewsButton = !!reviews && reviews.length > 4 && (
+    <div className="d-flex justify-content-end align-content-center">
+      <Button
+        id="delete-reviews"
+        variant="outline-danger"
+        className="delete-reviews-button"
+        onClick={() => {
+          fetch(`${API_URL}/reviews/purge`, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(res => {
+              setErrorMessage('')
+            })
+            .catch(err => {
+              setErrorMessage(`Could not delete reviews because ${err}`)
+            })
+        }}
+      >
+        Delete reviews
+      </Button>
+    </div>
+  )
+
   return (
     <>
-      {error && <h4 className="error-message">{`${error}`}</h4>}
+      {getReviewsError && <h4 className="error-message">{`${getReviewsError}`}</h4>}
       <h1 id="product-name">{product.name || '???'}</h1>
       <div className="d-flex justify-content-between align-content-center rating-box">
         <div id="average-rating" className="d-flex align-content-start">
@@ -220,6 +250,9 @@ const Product = ({ product }) => {
           )
         })}
       </div>
+
+      {deleteReviewsButton}
+      {errorMessage && <h4 className="error-message">{`${errorMessage}`}</h4>}
 
       <Modal
         show={showModal}
