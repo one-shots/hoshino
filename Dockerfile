@@ -5,7 +5,7 @@ ENV NODE_ENV=production
 
 RUN mkdir -p $DIR
 WORKDIR $DIR
-COPY . .
+COPY ./backend .
 
 RUN npm install
 

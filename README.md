@@ -1,17 +1,22 @@
 # Hoshino
 
-Hoshino means "stars" in Japanese.
+This is a sample full-stack app for adding 5-star product reviews, for the purpose of demo. The repo name "hoshino" means "stars" in Japanese.
 
-[Live demo](https://hoshino.dragonwatcher.com)
+![Demo screenshot](./screenshot.png)
 
-Project architecture:
-- The backend is in NodeJS. It is not as feature-rich as the Rails ecosystem, but it's a good option for a (dare I say) _minimalist_ implementation
-- For a cleaner commit history, each big change is squash merged from a [Pull Request](https://github.com/one-shots/hoshino/pulls?q=)
-- For UI components, we're using good old Bootstrap
-- For convenience, a `delete reviews` button appears if there are many reviews
-- For the "real time" requirement, I used HTTP polling as a crude solution and don't know if you were specifically looking for WebSocket? If so, I'd be happy to do that
+There is a [online demo](https://hoshino.tigerlab.org). If it's not live, then it's because I stopped the backend to reduce the AWS bill. Just ping me to restart it again!
 
-If this were a real project that grows, future improvements may include:
+Tech stack:
+- `backend/` is built in NodeJS with minimal libs:
+    - ExpressJS lib for a minimalist API
+    - KnexJS lib for query builder
+    - Postgres database, but Knex supports other SQL dbs
+- `frontend/` is built in vanilla/jQuery
+- `frontend-react/` is the same UI, built with React:
+    - Bootstrap for UI components
+- See [Pull Requests](https://github.com/one-shots/hoshino/pulls?q=) to view unsquashed changes
+
+If this was a real project, then the next steps would be to:
 - Adopt conventions for names, semantics, folder structure, error handling, input validation, unit tests, etc.
 - Improve security, add users and auth
 - Improve UI: pagination, more CRUD components, responsive layout
@@ -21,8 +26,9 @@ If this were a real project that grows, future improvements may include:
 - Improve React frontend:
     - Explore state management e.g. Redux, MobX, ..
     - Explore nested styling in each component, e.g. `styled-components`
+- Use WebSocket showing reviews in real-time, which is currently done with HTTP polling 
 - Use TypeScript, which should reduce bugs and encourage cleaner code as the project grows
-- The API is currently RESTful, but GraphQL can be helpful in some ways, such as reducing client requests and making the frontend dev experience more intuitive
+- The API is currently RESTful, but GraphQL can be helpful, such as reducing client requests and making the frontend dev experience more intuitive
 
 ## Local Development
 
@@ -57,6 +63,13 @@ Run server:
 cd backend
 npm i
 npm start
+```
+
+Run server with Docker:
+
+```shell script
+docker build -f Dockerfile -t hoshino .
+docker run -p 3001:3001 --env-file=backend/.env --add-host=host.docker.internal:host-gateway hoshino
 ```
 
 Run vanilla/jQuery frontend:
